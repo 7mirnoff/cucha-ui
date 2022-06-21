@@ -1,10 +1,8 @@
-import React, { Suspense, useRef } from 'react'
+import React, { useRef } from 'react'
 
 import { Html, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { Group, Vector3 } from 'three'
-
-import { Loader } from '../loader/loader'
 
 interface IDroneProps {
   target: Vector3
@@ -18,17 +16,15 @@ export const Drone: React.FC<IDroneProps> = ({ target }) => {
 
   return (
     <>
-      <Suspense fallback={<Loader />}>
-        <group ref={droneRef}>
-          <primitive scale={1} object={scene} />
-          <Html>
-            <div>
-              hello <br />
-              world
-            </div>
-          </Html>
-        </group>
-      </Suspense>
+      <group ref={droneRef}>
+        <primitive scale={1} object={scene} />
+        <Html>
+          <div>
+            hello <br />
+            world
+          </div>
+        </Html>
+      </group>
     </>
   )
 }
