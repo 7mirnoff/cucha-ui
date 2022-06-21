@@ -5,7 +5,6 @@ import { useFrame } from '@react-three/fiber'
 import { Group, Vector3 } from 'three'
 
 import { Loader } from '../loader/loader'
-import styles from '../scene.module.scss'
 
 interface IDroneProps {
   target: Vector3
@@ -23,7 +22,7 @@ export const Drone: React.FC<IDroneProps> = ({ target }) => {
         <group ref={droneRef}>
           <primitive scale={1} object={scene} />
           <Html>
-            <div className={styles.text}>
+            <div>
               hello <br />
               world
             </div>

@@ -11,9 +11,9 @@ export const Scene: React.FC = () => {
   const [target, setTarget] = useState(new Vector3(0, 0, 0))
   return (
     <div className={styles.scene}>
-      <Canvas dpr={[1, 2]}>
+      <Canvas dpr={[1, 1.5]}>
         <Drone target={target} />
-        {/*<ambientLight intensity={0.1} />*/}
+        <ambientLight intensity={0.1} color='#ffffff' />
         <directionalLight color='#ffffff' position={[5, 5, 5]} />
         <mesh
           rotation-x={Math.PI * -0.5}
