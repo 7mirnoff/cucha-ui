@@ -1,27 +1,31 @@
-import React, { Suspense } from 'react'
+import React, { useState } from 'react'
 
-import { useFBX } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
+import { Vector3 } from 'three'
 
-import { Loader } from './loader/loader'
+import { Drone } from './drone/drone'
 import styles from './scene.module.scss'
 
 export const Scene: React.FC = () => {
-  const yBotfbx = useFBX('/assets/scene/models/ybot.fbx')
-
+  const [target, setTarget] = useState(new Vector3(0, 0, 0))
   return (
     <div className={styles.scene}>
-      <Canvas>
-        <Suspense fallback={<Loader />}>
-          <primitive scale={0.01} object={yBotfbx} />
-
-          <ambientLight intensity={0.1} />
-          <directionalLight color='red' position={[0, 0, 5]} />
-          {/*<mesh>*/}
-          {/*  <boxGeometry />*/}
-          {/*  <meshStandardMaterial />*/}
-          {/*</mesh>*/}
-        </Suspense>
+      <Canvas dpr={[1, 2]}>
+        <Drone target={target} />
+        {/*<ambientLight intensity={0.1} />*/}
+        <directionalLight color='#ffffff' position={[5, 5, 5]} />
+        <mesh
+          rotation-x={Math.PI * -0.5}
+          onClick={(evt) => {
+            const { point } = evt
+            setTarget(new Vector3(point.x, 6, point.z))
+          }}
+        >
+          <planeBufferGeometry args={[100, 100]} />
+          <meshStandardMaterial />
+        </mesh>
+        <OrbitControls />
       </Canvas>
     </div>
   )
