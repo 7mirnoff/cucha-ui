@@ -1,0 +1,20 @@
+.root {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+.editor {
+  display: grid;
+  grid-template-columns: 400px auto;
+  height: 100%;
+}
+
+.sidebarWrapper {
+  height: 100%;
+  border-right: 1px solid #e5e5e5;
+}
+
+.workspaceWrapper {
+  height: 100%;
+}

@@ -1,0 +1,13 @@
+.root {
+  padding: 5px;
+}
+
+.item {
+  cursor: pointer;
+  height: 80px;
+  border-radius: 4px;
+}
+
+.selected {
+  background-color: #ffd95b;
+}

@@ -1,11 +1,14 @@
 import React from 'react'
 
-import { Scene } from '../features/scene'
+import { Editor } from '../features/components/editor'
+import EditorProvider from '../features/providers/editor/editor-provider'
 
 export const App: React.FC = () => {
   return (
     <>
-      <Scene />
+      <EditorProvider>
+        <Editor />
+      </EditorProvider>
     </>
   )
 }
