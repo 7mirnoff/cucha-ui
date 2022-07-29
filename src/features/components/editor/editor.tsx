@@ -14,7 +14,7 @@ export const Editor: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <p>DEBUG: SelectItemId: {editorContext.selectRecordsId}</p>
+      {/*<p>DEBUG: SelectItemId: {editorContext.selectRecordsId}</p>*/}
       <div className={styles.editor}>
         <div className={styles.sidebarWrapper}>
           <Sidebar

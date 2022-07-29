@@ -1,0 +1,27 @@
+.root {
+  height: 100%;
+  :global {
+    .editor-toolbar {
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .EasyMDEContainer .CodeMirror {
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .EasyMDEContainer {
+      height: 100%;
+      display: grid;
+      grid-template-rows: max-content auto max-content;
+    }
+  }
+
+  & > div {
+    max-height: 100vh;
+    height: 100%;
+  }
+}
