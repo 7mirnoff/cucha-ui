@@ -1,5 +1,7 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
+import SimpleMDE from 'easymde'
+import { marked } from 'marked'
 import SimpleMdeReact from 'react-simplemde-editor'
 
 import styles from './workspace.module.scss'
@@ -13,9 +15,17 @@ export const Workspace: React.FC = () => {
     setValue(value)
   }, [])
 
+  const workspaceOptions = useMemo(() => {
+    return {
+      previewRender(value) {
+        return marked.parse(value)
+      }
+    } as SimpleMDE.Options
+  }, [])
+
   return (
     <div className={styles.root}>
-      <SimpleMdeReact value={value} onChange={onChange} />
+      <SimpleMdeReact value={value} onChange={onChange} options={workspaceOptions} />
     </div>
   )
 }
