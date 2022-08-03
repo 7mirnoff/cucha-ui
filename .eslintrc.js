@@ -50,6 +50,12 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-assertion': ['off'], // bugged
     '@typescript-eslint/consistent-type-assertions': ['off'],
     '@typescript-eslint/no-misused-promises': ['off'],
-    'spaced-comment': 0
+    'spaced-comment': 0,
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto'
+      }
+    ]
   }
 }
