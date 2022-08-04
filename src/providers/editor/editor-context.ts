@@ -1,14 +1,11 @@
 import React from 'react'
 
-export interface IRecord {
-  id: number
-  value?: string
-}
+import { IRecord, RecordCode } from '../../model/record'
 
 export interface IEditorContext {
   records: IRecord[]
-  selectRecordsId?: number
-  setSelectRecordsId: (id: number) => void
+  selectRecordsId?: RecordCode
+  setSelectRecordsId: (code: RecordCode) => void
 }
 
 const EditorContext = React.createContext<IEditorContext | undefined>(undefined)

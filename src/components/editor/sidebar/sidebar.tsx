@@ -2,25 +2,25 @@ import React from 'react'
 
 import clsx from 'clsx'
 
-import { IRecord } from '../../../providers/editor/editor-context'
+import { IRecord, RecordCode } from '../../../model/record'
 import styles from './sidebar.module.scss'
 
 interface SidebarProps {
   data: IRecord[]
-  selectItemId?: number
-  onClickItem: (id: number) => void
+  selectItemId?: RecordCode
+  onClickItem: (code: RecordCode) => void
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ data, onClickItem, selectItemId }) => {
   return (
     <div className={styles.root}>
       {data.map((item) => {
-        const isSelected = item.id === selectItemId
+        const isSelected = item.code === selectItemId
         return (
           <div
-            key={item.id}
+            key={item.code}
             className={clsx(styles.item, { [styles.selected]: isSelected })}
-            onClick={() => onClickItem(item.id)}
+            onClick={() => onClickItem(item.code)}
           >
             {item.value}
           </div>

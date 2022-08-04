@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react'
 
-import EditorContext, { IEditorContext, IRecord } from './editor-context'
+import { IRecord, RecordCode } from '../../model/record'
+import EditorContext, { IEditorContext } from './editor-context'
 
 const mockData: IRecord[] = [
   {
-    id: 0,
-    value: 'Тест value'
+    code: '0',
+    value: 'Тест value',
+    status: 'New',
+    createDate: new Date(),
+    updateDate: new Date()
   },
   {
-    id: 1,
-    value: 'Тест value'
+    code: '1',
+    value: 'Тест value',
+    status: 'New',
+    createDate: new Date(),
+    updateDate: new Date()
   }
 ]
 
@@ -20,16 +27,16 @@ interface IEditorProvider {
 const EditorProvider: React.FC<IEditorProvider> = ({ children }) => {
   const records = mockData
 
-  const [selectItemId, setSelectItemId] = useState<number>()
+  const [selectItemId, setSelectItemId] = useState<RecordCode>()
 
   useEffect(() => {
-    setSelectItemId(records[0].id)
+    setSelectItemId(records[0].code)
   }, [records])
 
   const editorContext: IEditorContext = {
     records: records,
     selectRecordsId: selectItemId,
-    setSelectRecordsId: (id) => setSelectItemId(id)
+    setSelectRecordsId: (code) => setSelectItemId(code)
   }
 
   return <EditorContext.Provider value={editorContext}>{children}</EditorContext.Provider>
