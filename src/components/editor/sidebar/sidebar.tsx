@@ -6,26 +6,37 @@ import { IRecord, RecordCode } from '../../../model/record'
 import styles from './sidebar.module.scss'
 
 interface SidebarProps {
-  data: IRecord[]
+  records: IRecord[]
   selectItemId?: RecordCode
-  onClickItem: (code: RecordCode) => void
+  onClickRecord: (code: RecordCode) => void
+  onCreateRecord: () => void
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ data, onClickItem, selectItemId }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ records, onClickRecord, selectItemId, onCreateRecord }) => {
+  if (!records.length) {
+    return (
+      <>
+        <div>записи не найдены</div>
+        <button onClick={onCreateRecord}>add</button>
+      </>
+    )
+  }
+
   return (
     <div className={styles.root}>
-      {data.map((item) => {
-        const isSelected = item.code === selectItemId
+      {records.map((record) => {
+        const isSelected = record.code === selectItemId
         return (
           <div
-            key={item.code}
+            key={record.code}
             className={clsx(styles.item, { [styles.selected]: isSelected })}
-            onClick={() => onClickItem(item.code)}
+            onClick={() => onClickRecord(record.code)}
           >
-            {item.value}
+            {record.value}
           </div>
         )
       })}
+      <button onClick={onCreateRecord}>add</button>
     </div>
   )
 }

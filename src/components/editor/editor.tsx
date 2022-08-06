@@ -8,7 +8,7 @@ import { Workspace } from './workspace'
 export const Editor: React.FC = () => {
   const editorContext = useContext(EditorContext)
 
-  if (!editorContext) {
+  if (!editorContext || editorContext?.isLoading) {
     return <div>Загрузка...</div>
   }
 
@@ -18,9 +18,12 @@ export const Editor: React.FC = () => {
       <div className={styles.editor}>
         <div className={styles.sidebarWrapper}>
           <Sidebar
-            data={editorContext.records}
+            records={editorContext.records}
             selectItemId={editorContext.selectRecordsId}
-            onClickItem={editorContext.setSelectRecordsId}
+            onClickRecord={editorContext.setSelectRecordsId}
+            onCreateRecord={() => {
+              void editorContext.createRecord('ddf')
+            }}
           />
         </div>
         <div className={styles.workspaceWrapper}>
