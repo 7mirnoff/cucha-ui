@@ -22,6 +22,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ records, onClickRecord, select
     )
   }
 
+  const sortedRecord = records.sort((a, b) => +b.createDate - +a.createDate)
+  console.log(sortedRecord)
   return (
     <div className={styles.root}>
       {records.map((record) => {

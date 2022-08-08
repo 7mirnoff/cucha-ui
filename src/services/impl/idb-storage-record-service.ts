@@ -11,7 +11,7 @@ export default class IdbStorageRecordService extends IdbStorageBaseService imple
 
   async createRecord(createRequest: ICreateRecordRequest): Promise<IRecord> {
     const newRecord: IRecord = {
-      code: generateEntityCode('RECORD'),
+      code: generateEntityCode('REC'),
       value: createRequest.value,
       status: 'New',
       createDate: new Date(),
