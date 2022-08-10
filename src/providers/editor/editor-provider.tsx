@@ -37,13 +37,16 @@ const EditorProvider: React.FC<IEditorProvider> = ({ children }) => {
   const editorContext: IEditorContext = {
     isLoading: isLoading,
     records: recordsOps.value ?? [],
-    selectRecordsId: selectItemId,
-    setSelectRecordsId: (code) => setSelectItemId(code),
+    selectRecordCode: selectItemId,
+    setSelectRecordCode: (code) => setSelectItemId(code),
     createRecord: async (value) => {
       const newRecord = await api.recordService.createRecord({ value: value })
-      console.log('created record', newRecord)
       recordsOps.retry()
-      // setRecords((prevRecord) => [newRecord, ...prevRecord])
+      return newRecord
+    },
+    saveRecord: async (record) => {
+      await api.recordService.saveRecord(record)
+      recordsOps.retry()
     }
   }
 

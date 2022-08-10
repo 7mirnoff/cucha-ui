@@ -5,10 +5,11 @@ import { IRecord, RecordCode } from '../../model/record'
 export interface IEditorContext {
   isLoading: boolean
   records: IRecord[]
-  selectRecordsId?: RecordCode
-  setSelectRecordsId: (code: RecordCode) => void
-  createRecord: (value: string) => Promise<void>
+  selectRecordCode?: RecordCode
+  setSelectRecordCode: (code: RecordCode) => void
+  createRecord: (value: string) => Promise<IRecord>
+  saveRecord: (record: IRecord) => Promise<void>
 }
 
-const EditorContext = React.createContext<IEditorContext | undefined>(undefined)
+const EditorContext = React.createContext<IEditorContext>({} as IEditorContext)
 export default EditorContext

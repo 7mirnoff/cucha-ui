@@ -6,6 +6,9 @@
   cursor: pointer;
   height: 80px;
   border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .selected {

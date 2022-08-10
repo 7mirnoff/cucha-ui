@@ -4,12 +4,12 @@ import { ICreateRecordRequest, IRecordService } from '../record-service-api'
 import { IdbStorageBaseService } from './idb-storage-base-service'
 
 export default class IdbStorageRecordService extends IdbStorageBaseService implements IRecordService {
-  async getAllRecords(): Promise<IRecord[]> {
+  public async getAllRecords(): Promise<IRecord[]> {
     const records = ((await this._storage.table('records').toArray()) as IRecord[]) || null
     return records
   }
 
-  async createRecord(createRequest: ICreateRecordRequest): Promise<IRecord> {
+  public async createRecord(createRequest: ICreateRecordRequest): Promise<IRecord> {
     const newRecord: IRecord = {
       code: generateEntityCode('REC'),
       value: createRequest.value,
@@ -18,8 +18,14 @@ export default class IdbStorageRecordService extends IdbStorageBaseService imple
       updateDate: new Date()
     }
 
-    await this._storage.table('records').add(newRecord)
-
+    const newRecordCode = await this._storage.table('records').add(newRecord)
+    console.info('Created record:', newRecordCode)
     return newRecord
+  }
+
+  public async saveRecord(record: IRecord): Promise<IRecord> {
+    const newRecordCode = await this._storage.table('records').put(record)
+    console.info('Update record:', newRecordCode)
+    return record
   }
 }

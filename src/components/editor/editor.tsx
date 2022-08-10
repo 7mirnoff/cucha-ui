@@ -8,7 +8,16 @@ import { Workspace } from './workspace'
 export const Editor: React.FC = () => {
   const editorContext = useContext(EditorContext)
 
-  if (!editorContext || editorContext?.isLoading) {
+  const { records, selectRecordCode, setSelectRecordCode, createRecord, saveRecord, isLoading } = editorContext
+
+  const selectRecord = records.find((record) => record.code === selectRecordCode)
+  console.log(selectRecord)
+  const onChange = (value: string): void => {
+    if (!selectRecord) return
+    void saveRecord({ ...selectRecord, value })
+  }
+
+  if (isLoading) {
     return <div>Загрузка...</div>
   }
 
@@ -18,16 +27,17 @@ export const Editor: React.FC = () => {
       <div className={styles.editor}>
         <div className={styles.sidebarWrapper}>
           <Sidebar
-            records={editorContext.records}
-            selectItemId={editorContext.selectRecordsId}
-            onClickRecord={editorContext.setSelectRecordsId}
-            onCreateRecord={() => {
-              void editorContext.createRecord('ddf')
+            records={records}
+            selectRecordCode={selectRecordCode}
+            onClickRecord={setSelectRecordCode}
+            onCreateRecord={async () => {
+              const { code } = await createRecord('')
+              setSelectRecordCode(code)
             }}
           />
         </div>
         <div className={styles.workspaceWrapper}>
-          <Workspace />
+          <Workspace onChange={onChange} record={selectRecord} />
         </div>
       </div>
     </div>

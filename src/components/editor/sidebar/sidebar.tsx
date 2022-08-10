@@ -5,14 +5,14 @@ import clsx from 'clsx'
 import { IRecord, RecordCode } from '../../../model/record'
 import styles from './sidebar.module.scss'
 
-interface SidebarProps {
+interface ISidebarProps {
   records: IRecord[]
-  selectItemId?: RecordCode
+  selectRecordCode?: string
   onClickRecord: (code: RecordCode) => void
   onCreateRecord: () => void
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ records, onClickRecord, selectItemId, onCreateRecord }) => {
+export const Sidebar: React.FC<ISidebarProps> = ({ records, selectRecordCode, onClickRecord, onCreateRecord }) => {
   if (!records.length) {
     return (
       <>
@@ -23,18 +23,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ records, onClickRecord, select
   }
 
   const sortedRecord = records.sort((a, b) => +b.createDate - +a.createDate)
-  console.log(sortedRecord)
+
   return (
     <div className={styles.root}>
-      {records.map((record) => {
-        const isSelected = record.code === selectItemId
+      {sortedRecord.map((record) => {
+        const isSelected = record.code === selectRecordCode
         return (
           <div
             key={record.code}
             className={clsx(styles.item, { [styles.selected]: isSelected })}
             onClick={() => onClickRecord(record.code)}
           >
-            {record.value}
+            {record.value || 'Новая запись'}
           </div>
         )
       })}

@@ -6,6 +6,9 @@ export interface IRecordService {
 
   /** Создание записи*/
   createRecord: (createRecord: ICreateRecordRequest) => Promise<IRecord>
+
+  /** Сохранение записи*/
+  saveRecord: (record: IRecord) => Promise<IRecord>
 }
 
 export interface ICreateRecordRequest {

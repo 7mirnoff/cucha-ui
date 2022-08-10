@@ -19,7 +19,7 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js'],
   rules: {
     'import/order': [
-      'error',
+      'warn',
       {
         groups: ['builtin', 'external', 'internal'],
         pathGroups: [

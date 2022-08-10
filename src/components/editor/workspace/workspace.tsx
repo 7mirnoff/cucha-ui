@@ -1,31 +1,35 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 
 import SimpleMDE from 'easymde'
 import { marked } from 'marked'
 import SimpleMdeReact from 'react-simplemde-editor'
 
+import { IRecord } from '../../../model/record'
 import styles from './workspace.module.scss'
-
 import 'easymde/dist/easymde.min.css'
 
-export const Workspace: React.FC = () => {
-  const [value, setValue] = useState('Initial value')
+interface IWorkspaceProps {
+  record?: IRecord
+  onChange: (value: string) => void
+}
 
-  const onChange = useCallback((value: string) => {
-    setValue(value)
-  }, [])
-
+export const Workspace: React.FC<IWorkspaceProps> = ({ record, onChange }) => {
   const workspaceOptions = useMemo(() => {
     return {
+      autofocus: true,
       previewRender(value) {
         return marked.parse(value)
       }
     } as SimpleMDE.Options
-  }, [])
+  }, [record?.code])
 
   return (
     <div className={styles.root}>
-      <SimpleMdeReact value={value} onChange={onChange} options={workspaceOptions} />
+      {record ? (
+        <SimpleMdeReact value={record?.value} onChange={onChange} options={workspaceOptions} />
+      ) : (
+        <div>Крутилка</div>
+      )}
     </div>
   )
 }
